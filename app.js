@@ -4,6 +4,8 @@ const dotenv = require('dotenv');
 const connectDB = require('./config/db');
 
 // routes importing
+const authRoute = require('./routes/authRoute');
+
 
 // config dotenv
 dotenv.config();
@@ -19,11 +21,12 @@ app.use(cors());
 app.use(express.json());
 
 // Default route
-app.use('/', async (req, res) => {
+app.get('/', async (req, res) => {
     res.send("this e-commerce server is running");
 })
 
 // Use Routes
+app.use('/api/user', authRoute);
 
 // Export app
 module.exports = app;
